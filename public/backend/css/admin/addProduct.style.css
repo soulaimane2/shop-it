@@ -1,0 +1,19 @@
+.uploadField {
+    width: 100%;
+    height: 200px;
+    background-color: #f8f8f8;
+    border: 1px dashed #bbbbbb;
+    overflow-y: auto;
+}
+.uploadField img {
+    width: 23%;
+    height: 100%;
+    border: 1px solid #bbbbbb;
+    border-radius: 5px;
+    margin-right: 5px;
+    display: initial;
+    margin: auto 12px;
+}
+.mainImg {
+    border: 7px solid #ff5f5f !important;
+}

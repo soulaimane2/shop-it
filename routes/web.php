@@ -10,6 +10,9 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\admin\coupon\CouponController;
 use App\Http\Controllers\admin\emails\EmailController;
 use App\Http\Controllers\admin\products\ProductController;
+
+use App\Http\Controllers\costumers\costumersController;
+use App\Http\Controllers\costumerLogin\CostumersAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,6 +27,29 @@ use App\Http\Controllers\admin\products\ProductController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// auth
+
+Route::get('/Userlogin',[CostumersAuthController::class,'index']);
+Route::post('/Userlogin/auth',[CostumersAuthController::class,'authenticate']);
+Route::get('/Costumerlogout',[CostumersAuthController::class,'Costumerlogout'])->middleware(['costumerAuth']);;
+
+Route::get('/register',function(){
+    if(Auth::guard('costumer')->check()){
+        return redirect('/');
+    }
+    return view('Home.register');
+});
+Route::post('/register/add',[costumersController::class,'addCostumer']);
+
+Route::get('/costumer',[costumersController::class,'costumerIndex'])->middleware(['costumerAuth']);
+
+//* auth
+
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

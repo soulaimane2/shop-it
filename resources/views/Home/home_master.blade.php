@@ -54,11 +54,22 @@
 									</li>
 								</ul>
 							</div>
+
 							<div class="top_bar_user">
 								<div class="user_icon"><img src="{{asset('frontend/images/user.svg')}}" alt=""></div>
-								<div><a href="#">Register</a></div>
-								<div><a href="#">Sign in</a></div>
+								@if (!Auth::guard('costumer')->check())
+									<div><a href="/register">Register</a></div>
+									<div><a href="/Userlogin">Sign in</a></div>
+								
+								@else
+								<div><a href="/costumer">Profile</a></div>
+								<div><a href="/Costumerlogout">Logout</a></div>
+								@endif
+
 							</div>
+							
+								
+							
 						</div>
 					</div>
 				</div>

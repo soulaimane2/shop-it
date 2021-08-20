@@ -10,7 +10,7 @@ use App\Http\Controllers\BrandController;
 use App\Http\Controllers\admin\coupon\CouponController;
 use App\Http\Controllers\admin\emails\EmailController;
 use App\Http\Controllers\admin\products\ProductController;
-
+use App\Http\Controllers\costumer\WishlistController;
 use App\Http\Controllers\costumers\costumersController;
 use App\Http\Controllers\costumerLogin\CostumersAuthController;
 /*
@@ -32,7 +32,7 @@ Route::get('/', function () {
 
 Route::get('/Userlogin',[CostumersAuthController::class,'index']);
 Route::post('/Userlogin/auth',[CostumersAuthController::class,'authenticate']);
-Route::get('/Costumerlogout',[CostumersAuthController::class,'Costumerlogout'])->middleware(['costumerAuth']);;
+Route::get('/Costumerlogout',[CostumersAuthController::class,'Costumerlogout'])->middleware(['costumerAuth']);
 
 Route::get('/register',function(){
     if(Auth::guard('costumer')->check()){
@@ -120,4 +120,10 @@ Route::get('/products/{id}',[ProductController::class,'showProductPage']);
 
 
 
+/** Shop */
+
+Route::get('/shop',[WishlistController::class,'index']);
+Route::post('/shop/add',[WishlistController::class,'addToWishList'])->middleware(['costumerAuth']);
+Route::get('/wishlist',[WishlistController::class,'showWishes'])->middleware(['costumerAuth']);
+Route::get('/wishlist/delete/{id}',[WishlistController::class,'deleteWishes'])->middleware(['costumerAuth']);
 require __DIR__.'/auth.php';

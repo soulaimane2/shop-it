@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\loginUsers\Costumer;
 use Illuminate\Support\Facades\Hash;
-
+use App\Models\costumer\Whishlist;
+use Auth;
 class costumersController extends Controller
 {
     //
@@ -29,6 +30,7 @@ class costumersController extends Controller
 
 
     public function costumerIndex(){
-        return view('front-end.costumerActions.index');
+        $wishList = Whishlist::all()->where('costumerId',Auth::guard('costumer')->user()->id);
+        return view('front-end.costumerActions.index',compact('wishList'));
     }
 }
